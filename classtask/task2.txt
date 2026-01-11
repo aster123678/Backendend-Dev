@@ -1,0 +1,168 @@
+Task2- description
+Git Basic Workflow & Undo Operations
+Situation
+You are working on a project and accidentally make mistakes while committing code.
+Tasks:
+Initialize a Git repository.
+Add README.md and commit it.
+Modify a file and check changes before committing.
+Unstage a file after adding it.
+Fix a wrong commit message.
+Revert a commit safely.
+Task2- solution:
+
+
+jai_ch925@HP:/home$ cd ..
+jai_ch925@HP:/$ cd mnt
+jai_ch925@HP:/mnt$ cd d
+jai_ch925@HP:/mnt/d$ mkdir git-undo-practice
+jai_ch925@HP:/mnt/d$ cd git-undo-practice
+jai_ch925@HP:/mnt/d/git-undo-practice$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /mnt/d/git-undo-practice/.git/
+jai_ch925@HP:/mnt/d/git-undo-practice$ git branch -M main
+jai_ch925@HP:/mnt/d/git-undo-practice$ echo "Git Undo Practice" >> README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git add Readme.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git commit -m " Add Readme.md"
+On branch main
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+jai_ch925@HP:/mnt/d/git-undo-practice$ git log --oneline
+fatal: your current branch 'main' does not have any commits yet
+jai_ch925@HP:/mnt/d/git-undo-practice$ echo "Some new changes" >> README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+jai_ch925@HP:/mnt/d/git-undo-practice$ git add README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   README.md
+
+jai_ch925@HP:/mnt/d/git-undo-practice$ git diff --staged
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..bfe4b19
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++Git Undo Practice
++Some new changes
+jai_ch925@HP:/mnt/d/git-undo-practice$ git commit -m "added the new content"
+[main (root-commit) 48120c5] added the new content
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ echo "more new changes" >> README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git add README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   README.md
+
+jai_ch925@HP:/mnt/d/git-undo-practice$ git reset README.md
+Unstaged changes after reset:
+M       README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+jai_ch925@HP:/mnt/d/git-undo-practice$ git commit --amend -m"Fixed"
+[main 4d7d08e] Fixed
+ Date: Sun Jan 11 07:35:50 2026 +0000
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git log --oneline
+4d7d08e (HEAD -> main) Fixed
+jai_ch925@HP:/mnt/d/git-undo-practice$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+jai_ch925@HP:/mnt/d/git-undo-practice$ git log --oneline
+4d7d08e (HEAD -> main) Fixed
+jai_ch925@HP:/mnt/d/git-undo-practice$ git checkout -b revert -demo
+error: unknown switch `e'
+usage: git checkout [<options>] <branch>
+   or: git checkout [<options>] [<branch>] -- <file>...
+
+    -b <branch>           create and checkout a new branch
+    -B <branch>           create/reset and checkout a branch
+    -l                    create reflog for new branch
+    --[no-]guess          second guess 'git checkout <no-such-branch>' (default)
+    --[no-]overlay        use overlay mode (default)
+    -q, --[no-]quiet      suppress progress reporting
+    --[no-]recurse-submodules[=<checkout>]
+                          control recursive updating of submodules
+    --[no-]progress       force progress reporting
+    -m, --[no-]merge      perform a 3-way merge with the new branch
+    --[no-]conflict <style>
+                          conflict style (merge, diff3, or zdiff3)
+    -d, --[no-]detach     detach HEAD at named commit
+    -t, --[no-]track[=(direct|inherit)]
+                          set branch tracking configuration
+    -f, --[no-]force      force checkout (throw away local modifications)
+    --[no-]orphan <new-branch>
+                          new unparented branch
+    --[no-]overwrite-ignore
+                          update ignored files (default)
+    --[no-]ignore-other-worktrees
+                          do not check if another worktree is holding the given ref
+    -2, --ours            checkout our version for unmerged files
+    -3, --theirs          checkout their version for unmerged files
+    -p, --[no-]patch      select hunks interactively
+    --[no-]ignore-skip-worktree-bits
+                          do not limit pathspecs to sparse entries only
+    --[no-]pathspec-from-file <file>
+                          read pathspec from file
+    --[no-]pathspec-file-nul
+                          with --pathspec-from-file, pathspec elements are separated with NUL character
+
+jai_ch925@HP:/mnt/d/git-undo-practice$ git checkout -b revert-demo
+Switched to a new branch 'revert-demo'
+jai_ch925@HP:/mnt/d/git-undo-practice$ git add README.md
+jai_ch925@HP:/mnt/d/git-undo-practice$ git commit -m "Revert changes"
+[revert-demo 0cfb415] Revert changes
+ 1 file changed, 1 insertion(+)
+jai_ch925@HP:/mnt/d/git-undo-practice$ git revert HEAD
+[revert-demo 351a1de] Revert "Revert changes"
+ 1 file changed, 1 deletion(-)
+jai_ch925@HP:/mnt/d/git-undo-practice$ git revert HEAD
+[revert-demo 068a4d3] o:Reapply "Revert changes"
+ 1 file changed, 1 insertion(+)
+jai_ch925@HP:/mnt/d/git-undo-practice$ git log --online
+fatal: unrecognized argument: --online
+jai_ch925@HP:/mnt/d/git-undo-practice$

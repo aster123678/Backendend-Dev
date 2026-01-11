@@ -18,3 +18,9 @@ Created practice/var/log/app with sample logs (.hidden.log, app.log, error.log).
 
 ## Screenshot Reference:
 
+
+![Screenshot Demo](images/Screenshot-2026-01-08-235351.jpg)
+
+
+## Terminal Demo Screenshot:
+![Screenshot Demo](images/Screenshot-2026-01-08-235351.jpg)
