@@ -1,0 +1,100 @@
+jai_ch925@HP:/mnt/c/Users/jaich$ cd
+jai_ch925@HP:~$ cd ..
+jai_ch925@HP:/home$ cd ..
+jai_ch925@HP:/$ cd mnt
+jai_ch925@HP:/mnt$ cd d
+jai_ch925@HP:/mnt/d$ cd Backend-Dev
+jai_ch925@HP:/mnt/d/Backend-Dev$ cd assignment
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git branch feature
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git checkout feature
+D       classtask/images/Screenshot 2026-01-08 235351.png
+M       classtask/task1.txt
+Switched to branch 'feature'
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ touch feature.txt
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ echo"Feature work" > feature.txt
+echoFeature work: command not found
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ echo "Feature work" > feature.tx
+t
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git add feature.txt
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git commit -m "Added the Feature file"
+[feature ac765e5] Added the Feature file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 assignment/feature.txt
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git checkout main
+error: Your local changes to the following files would be overwritten by checkout:
+        classtask/task1.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git merge feature
+Already up to date.
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git branch -d feature
+error: cannot delete branch 'feature' used by worktree at '/mnt/d/Backend-Dev'
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git branch
+* feature
+  main
+  unix-commands-git-github
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git checkout main
+error: Your local changes to the following files would be overwritten by checkout:
+        classtask/task1.txt
+Please commit your changes or stash them before you switch branches.
+Aborting
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git status
+On branch feature
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../classtask/images/Screenshot 2026-01-08 235351.png
+        modified:   ../classtask/task1.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        git-practice/
+        ../classtask/git-practice/
+        ../classtask/task1.png
+        ../classtask/task2.txt
+        ../classtask/task3.txt
+        ../git-conflict-practice/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ git add classtask/task1.txt
+warning: could not open directory 'assignment/classtask/': No such file or directory
+fatal: pathspec 'classtask/task1.txt' did not match any files
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ cd assignment
+-bash: cd: assignment: No such file or directory
+jai_ch925@HP:/mnt/d/Backend-Dev/assignment$ cd
+jai_ch925@HP:~$ cd mnt
+-bash: cd: mnt: No such file or directory
+jai_ch925@HP:~$ cd ..
+jai_ch925@HP:/home$ cd mnt
+-bash: cd: mnt: No such file or directory
+jai_ch925@HP:/home$ cd ..
+jai_ch925@HP:/$ cd mnt
+jai_ch925@HP:/mnt$ cd d
+jai_ch925@HP:/mnt/d$ cd Backend-Dev
+jai_ch925@HP:/mnt/d/Backend-Dev$ git add classtask/task1.txt
+jai_ch925@HP:/mnt/d/Backend-Dev$ git commit-m "Work done"
+git: 'commit-m' is not a git command. See 'git --help'.
+
+The most similar command is
+        commit-tree
+jai_ch925@HP:/mnt/d/Backend-Dev$ git commit -m "Work done"
+[feature 0c0664a] Work done
+ 1 file changed, 3 insertions(+)
+jai_ch925@HP:/mnt/d/Backend-Dev$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+jai_ch925@HP:/mnt/d/Backend-Dev$  git branch -d feature
+error: the branch 'feature' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D feature'
+jai_ch925@HP:/mnt/d/Backend-Dev$ git merge feature
+Updating 6e64a0a..0c0664a
+Fast-forward
+ assignment/feature.txt                           |   1 +
+ .../images/Screenshot 2026-01-08 235351.png      | Bin 0 -> 166522 bytes
+ classtask/task1.txt                              |  26 +++++++++++++++++++
+ 3 files changed, 27 insertions(+)
+ create mode 100644 assignment/feature.txt
+ create mode 100644 classtask/images/Screenshot 2026-01-08 235351.png
+ create mode 100644 classtask/task1.txt
+jai_ch925@HP:/mnt/d/Backend-Dev$ git branch -d feature
+Deleted branch feature (was 0c0664a).
