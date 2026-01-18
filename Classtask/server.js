@@ -2,54 +2,27 @@ const http = require('http');
 const fs = require('fs');
 
 const server = http.createServer((req, res) => {
-    // console.log("new request recieved")
-    // console.log("req.headers")
-    // console.log(req)
-    const timestamp = Date.now();
-    const log = `${timestamp}: ${req.method} ${req.url}\n`;
-    // console.log(log);
-    try {
-        fs.appendFileSync('log.txt', log, 'utf8');
-    } catch(e) {
-        console.error('Log write failed:', e.message);
-    }
+    const timestamp = new Date().toISOString();
+    let pageMessage = '';
+    let statusCode = 200;
 
-    console.log('Handling:', req.url);
-
-    res.setHeader('Content-Type', 'text/plain');
-    
-    if (req.url === '') {
-        res.statusCode = 204;
-        res.end();
-        return;
-    }
-
-    let pageMessage= ' ';
-    switch (req.url) {
-        case '/':
-        pageMessage = 'Home page';
-              break;
-        case '/about':
-             pageMessage = 'About page';
-              break;
-        case '/contact':
-             pageMessage = 'Contact page';
-              break;
-        case '/test':
-             pageMessage = `Test OK at ${timestamp}`;
-              break;
+    switch(req.url) {
+        case '/': pageMessage = 'This is Home Page'; break;
+        case '/about': pageMessage = 'This is About Page'; break;
+        case '/contact': pageMessage = 'This is Contact Page'; break;
         default: 
-            res.statusCode = 404;
-            pageMessage = '404 Not Found';
+            statusCode = 404;
+            pageMessage = '404 Page Not Found';
     }
-    const responseLog = `${timestamp}: Response sent: "${pageMessage}" for ${req.url}\n`;
-    console.log(responseLog.trim());
-    fs.appendFileSync('log.txt', responseLog, 'utf8');
 
+    res.writeHead(statusCode, {'Content-Type': 'text/plain'});
     res.end(pageMessage);
+
+    // Async logging AFTER response
+    const logEntry = `${timestamp} | ${req.url} | ${pageMessage}\n`;
+    fs.appendFile('log.txt', logEntry, 'utf8', (err) => {
+        if (err) console.error('Logging error:', err);
+    });
 });
 
-server.listen(3000, () => {console.log('Server started');
-    
-});
-
+server.listen(8000, () => console.log('Server on port 8000'));
